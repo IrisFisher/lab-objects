@@ -7,14 +7,34 @@ from lab_classes import User, Tweet
 
 
 def build_feed():
-    # Create your accounts and posts, then call their methods.
-    # Return the two lists: return users, posts
-    pass
+    wirt = User('the_pilgrim')
+    greg = User('mr_candy_pants')
+
+    poem = Tweet('the_pilgrim', 'Though I am lost, my wounded heart resides back home, in pieces strewn about the graveyard of my lost love. #forSara')
+    wirt.follow
+    wirt.unfollow
+    poem.like
+    poem.unlike
+
+    reply = Tweet('mr_candy_pants', '#aintThatJustTheWay')
+    greg.follow
+    reply.like
+    reply.unlike
+
+    frog_search = Tweet('mr_candy_pants', "anyways, WHERE IS THAT FROG 'O MINE")
+    greg.unfollow
+    frog_search.like
+    frog_search.unlike
+
+    return [wirt, greg, poem, reply, frog_search]
 
 
 def main():
-    # Call build_feed and display the returned objects and hashtags.
-    pass
+    for item in build_feed():
+        print(item)
+        if type(item) == Tweet:
+            print (item.hashtags())
+        print('')
 
 
 if __name__ == '__main__':

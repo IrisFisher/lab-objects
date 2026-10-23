@@ -13,7 +13,9 @@ class User:
         >>> u.followers
         0
         '''
-        # TODO: store username on self, and start followers at 0
+        self.username = username
+        self.followers = 0
+
 
     def follow(self):
         '''
@@ -25,7 +27,8 @@ class User:
         >>> u.followers
         2
         '''
-        # TODO: add one to self.followers
+        self.followers += 1
+
 
     def unfollow(self):
         '''
@@ -42,7 +45,8 @@ class User:
         >>> u.followers
         0
         '''
-        # TODO: subtract one from self.followers, but not below 0
+        if self.followers >= 1:
+            self.followers -= 1
 
     def __str__(self):
         '''
@@ -53,7 +57,7 @@ class User:
         >>> str(User('bob'))
         '@bob'
         '''
-        # TODO: return the username with an '@' in front
+        return ('@' +str(self.username))
 
     def __eq__(self, other):
         '''
@@ -66,8 +70,13 @@ class User:
         >>> User('alice') == 'alice'
         False
         '''
-        # TODO: return True when other is a User with the same username
-
+        try:
+            if self.username == other.username:
+                return True
+            else:
+                return False
+        except AttributeError:
+            return False
 
 class Tweet:
     def __init__(self, author, text):
@@ -82,7 +91,9 @@ class Tweet:
         >>> t.likes
         0
         '''
-        # TODO: store author and text on self, and start likes at 0
+        self.author = author
+        self.text = text
+        self.likes = 0
 
     def like(self):
         '''
@@ -94,7 +105,7 @@ class Tweet:
         >>> t.likes
         2
         '''
-        # TODO: add one to self.likes
+        self.likes += 1
 
     def unlike(self):
         '''
@@ -107,7 +118,8 @@ class Tweet:
         >>> t.likes
         0
         '''
-        # TODO: subtract one from self.likes, but not below 0
+        if self.likes >= 1:
+            self.likes -= 1
 
     def hashtags(self):
         '''
@@ -122,6 +134,23 @@ class Tweet:
         '''
         # TODO: split the text into words; keep the ones starting with '#',
         # returning each one without its leading '#'
+        
+        hashtags = []
+        i = 0
+        while i < len(str(self.text)):
+            if str(self.text)[i] == '#' and (i == 0 or str(self.text)[i-1] == ' '):
+                word_end = self.text.find(' ', i+1)
+                if word_end != -1:
+                    tag = self.text[i+1:word_end]
+                    i = word_end + 1
+                else:
+                    tag = self.text[i+1:]
+                    i = len(str(self.text)) + 1
+                hashtags.append(tag)
+            else:
+                i += 1
+        return hashtags
+
 
     def __str__(self):
         '''
@@ -130,8 +159,8 @@ class Tweet:
         >>> print(Tweet('alice', 'hello world'))
         @alice: hello world
         '''
-        # TODO: return the author and text formatted as '@author: text'
 
+        return ('@' + str(self.author) + ': ' + str(self.text))
 
 if __name__ == '__main__':
     import doctest
