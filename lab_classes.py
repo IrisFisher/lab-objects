@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 '''Starter types for the community feed lab.'''
-
+import string
 
 class User:
     def __init__(self, username):
@@ -132,15 +132,16 @@ class Tweet:
         >>> Tweet('alice', '#Games #Games #BringSnacks! word#inside #').hashtags()
         ['Games', 'Games', 'BringSnacks!', '']
         '''
-        # TODO: split the text into words; keep the ones starting with '#',
-        # returning each one without its leading '#'
         
         hashtags = []
         i = 0
         while i < len(str(self.text)):
-            if str(self.text)[i] == '#' and (i == 0 or str(self.text)[i-1] == ' '):
-                word_end = self.text.find(' ', i+1)
-                if word_end != -1:
+            if str(self.text)[i] == '#' and (i == 0 or (str(self.text)[i-1] in string.whitespace)):
+                word_end = len(str(self.text)) + 1
+                for char in string.whitespace:
+                    if self.text.find(char, i+1) != -1 and self.text.find(char, i+1) < word_end:
+                        word_end = self.text.find(' ', i+1)
+                if word_end != len(str(self.text)) + 1:
                     tag = self.text[i+1:word_end]
                     i = word_end + 1
                 else:

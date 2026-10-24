@@ -26,14 +26,18 @@ def build_feed():
     frog_search.like
     frog_search.unlike
 
-    return [wirt, greg, poem, reply, frog_search]
+    return [wirt, greg] , [poem, reply, frog_search]
 
 
 def main():
-    for item in build_feed():
+    users, posts = build_feed()
+    for item in users:
         print(item)
-        if type(item) == Tweet:
-            print (item.hashtags())
+        print('')
+
+    for item in posts:
+        print(item)
+        print (item.hashtags())
         print('')
 
 
