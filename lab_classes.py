@@ -135,7 +135,7 @@ class Tweet:
         
         hashtags = []
         i = 0
-        while i < len(str(self.text)):
+        for i in range(len(str(self.text))):
             if str(self.text)[i] == '#' and (i == 0 or (str(self.text)[i-1] in string.whitespace)):
                 word_end = len(str(self.text)) + 1
                 for char in string.whitespace:
@@ -143,13 +143,9 @@ class Tweet:
                         word_end = self.text.find(' ', i+1)
                 if word_end != len(str(self.text)) + 1:
                     tag = self.text[i+1:word_end]
-                    i = word_end + 1
                 else:
                     tag = self.text[i+1:]
-                    i = len(str(self.text)) + 1
                 hashtags.append(tag)
-            else:
-                i += 1
         return hashtags
 
 
