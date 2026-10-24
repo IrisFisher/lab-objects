@@ -139,7 +139,7 @@ class Tweet:
             if str(self.text)[i] == '#' and (i == 0 or (str(self.text)[i-1] in string.whitespace) or str(self.text)[i-2:i-1] == '\n'):
                 word_end = len(str(self.text)) + 1
                 if self.text.find('\n', i+1) != -1 and self.text.find('\n', i+1) < word_end:
-                    word_end = self.text.find(' ', i+1)
+                    word_end = self.text.find('\n', i+1)
                 for char in string.whitespace:
                     if self.text.find(char, i+1) != -1 and self.text.find(char, i+1) < word_end:
                         word_end = self.text.find(' ', i+1)
