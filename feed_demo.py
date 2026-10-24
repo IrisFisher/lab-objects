@@ -11,20 +11,20 @@ def build_feed():
     greg = User('mr_candy_pants')
 
     poem = Tweet('the_pilgrim', 'Though I am lost, my wounded heart resides back home, in pieces strewn about the graveyard of my lost love. #forSara')
-    wirt.follow
-    wirt.unfollow
-    poem.like
-    poem.unlike
+    wirt.follow()
+    wirt.unfollow()
+    poem.like()
+    poem.unlike()
 
     reply = Tweet('mr_candy_pants', '#aintThatJustTheWay')
-    greg.follow
-    reply.like
-    reply.unlike
+    greg.follow()
+    reply.like()
+    reply.unlike()
 
     frog_search = Tweet('mr_candy_pants', "anyways, WHERE IS THAT FROG 'O MINE")
-    greg.unfollow
-    frog_search.like
-    frog_search.unlike
+    greg.unfollow()
+    frog_search.like()
+    frog_search.unlike()
 
     return [wirt, greg] , [poem, reply, frog_search]
 
